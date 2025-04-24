@@ -20,6 +20,7 @@ body {
     background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
+    background-color: #0c0513; /* Fallback color */
 }
 
 /* Header and Navigation */
@@ -170,6 +171,7 @@ body {
     max-width: 1200px;
     position: relative;
     overflow: hidden;
+    min-height: calc(100vh - 5rem); /* Ensure minimum height */
 }
 
 .container::before {
@@ -964,6 +966,7 @@ main + .heading-container {
 html {
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE and Edge */
+    height: 100%;
 }
 
 html::-webkit-scrollbar {
@@ -974,6 +977,8 @@ body {
     overflow-x: hidden; /* Prevent horizontal scroll */
     margin: 0;
     padding: 0;
+    height: 100%;
+    width: 100%;
 }
 
 /* For elements that might need scrolling (like textareas) */
