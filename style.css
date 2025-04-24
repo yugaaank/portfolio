@@ -22,7 +22,7 @@ body {
     background-image: url("image/bck.jpg");
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
+    background-attachment: scroll;
     background-repeat: no-repeat;
     background-color: #0c0513; /* Fallback color */
 }
