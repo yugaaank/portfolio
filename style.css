@@ -1025,6 +1025,14 @@ textarea::-webkit-scrollbar-thumb:hover {
         padding: 1rem;
     }
 
+    .hero {
+        background-color: rgba(12, 5, 19, 0.7);
+        border-radius: 20px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        padding: 2rem;
+        margin: 1rem 0;
+    }
+
     .profile-container {
         text-align: center;
     }
@@ -1052,6 +1060,10 @@ textarea::-webkit-scrollbar-thumb:hover {
 @media (max-width: 480px) {
     .container {
         padding: 0.5rem;
+    }
+
+    .hero {
+        padding: 1.5rem;
     }
 
     .profile-info p {
