@@ -22,7 +22,7 @@ body {
     background-image: url("image/bck.jpg");
     background-size: cover;
     background-position: center;
-    background-attachment: scroll;
+    background-attachment: fixed;
     background-repeat: no-repeat;
     background-color: #0c0513; /* Fallback color */
 }
@@ -1009,4 +1009,57 @@ textarea::-webkit-scrollbar-thumb {
 
 textarea::-webkit-scrollbar-thumb:hover {
     background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Main Container Styles */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    width: 100%;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .profile-container {
+        text-align: center;
+    }
+
+    .profile-image {
+        margin: 0 auto;
+        display: block;
+    }
+
+    .profile-info {
+        margin: 1.5rem 0;
+    }
+
+    .button-container {
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .button {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0.5rem;
+    }
+
+    .profile-info p {
+        font-size: 1.2rem;
+    }
+
+    .button {
+        width: 100%;
+        max-width: 250px;
+    }
 }
