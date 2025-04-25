@@ -666,7 +666,7 @@ main + .heading-container {
 @media (max-width: 480px) {
   body {
     background-image: url("image/bck2.jpg");
-    background-size: fit;
+    background-size: stretch;
     background-repeat: no-repeat;
   }
 
