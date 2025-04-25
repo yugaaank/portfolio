@@ -308,8 +308,8 @@ body {
 }
 
 .heading:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    transform: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .heading h2 {
@@ -343,15 +343,14 @@ body {
 
 /* Specific section adjustments */
 .project-card, .achievement-card, .contact, .education-card {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
-    will-change: transform, opacity;
+    opacity: 1;
+    transform: none;
+    will-change: auto;
 }
 
 .project-card.animate, .achievement-card.animate, .contact.animate, .education-card.animate {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
 }
 
 /* Base styles for cards */
@@ -373,9 +372,8 @@ body {
 
 /* Hover effects */
 .project-card:hover, .achievement-card:hover, .contact:hover, .education-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 /* Sequential animation delays */
@@ -414,7 +412,7 @@ body {
 }
 
 .project-card:hover img, .achievement-card:hover img {
-    transform: scale(1.05);
+    transform: none;
 }
 
 .project-info, .achievement-info {
@@ -472,7 +470,7 @@ body {
 .project-link:hover, .achievement-link:hover {
     background-color: #fff;
     color: rgba(12, 5, 19, 0.9);
-    transform: translateY(-2px);
+    transform: none;
 }
 
 /* First heading container adjustment */
@@ -491,20 +489,14 @@ main + .heading-container {
     color: #fff;
     text-align: center;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.4s ease-out, transform 0.4s ease-out, box-shadow 0.3s ease;
-    will-change: transform, opacity;
-}
-
-#contact.animate {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
+    will-change: auto;
 }
 
 #contact:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    transform: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .contact-form {
@@ -909,20 +901,19 @@ main + .heading-container {
 
 /* Animation for Education Cards */
 .education-card {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.4s ease-out, transform 0.4s ease-out, box-shadow 0.3s ease;
-    will-change: transform, opacity;
+    opacity: 1;
+    transform: none;
+    will-change: auto;
 }
 
 .education-card.animate {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
 }
 
 .education-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    transform: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .contact a {
@@ -1022,7 +1013,8 @@ textarea::-webkit-scrollbar-thumb:hover {
 /* Mobile Responsive Styles */
 @media (max-width: 768px) {
     .container {
-        padding: 1rem;
+        margin-top: 7rem;
+        padding: 2rem;
     }
 
     .hero {
@@ -1059,7 +1051,8 @@ textarea::-webkit-scrollbar-thumb:hover {
 
 @media (max-width: 480px) {
     .container {
-        padding: 0.5rem;
+        margin-top: 6rem;
+        padding: 1.5rem;
     }
 
     .hero {

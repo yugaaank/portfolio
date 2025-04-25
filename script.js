@@ -3,7 +3,6 @@ const navbar = document.querySelector('.navbar');
 document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-links a');
-    const fadeEls = document.querySelectorAll('.fade-in');
 
     function updateActiveSection() {
         const scrollPosition = window.pageYOffset;
@@ -47,18 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initial check for active section
     updateActiveSection();
-
-    // Handle scroll animations
-    function revealOnScroll() {
-        fadeEls.forEach(el => {
-            const rect = el.getBoundingClientRect();
-            if (rect.top < window.innerHeight - 60) {
-                el.classList.add('visible');
-            }
-        });
-    }
-    window.addEventListener('scroll', revealOnScroll);
-    revealOnScroll();
 
     // Hamburger menu functionality
     const hamburger = document.getElementById('hamburger-menu');
@@ -107,62 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
-    // Scroll animation for cards
-    const cards = document.querySelectorAll('.project-card, .achievement-card, .contact, .education-card');
-    
-    const observerOptions = {
-        root: null,
-        rootMargin: '-50px',
-        threshold: 0.15
-    };
-    
-    const cardObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate');
-            } else {
-                entry.target.classList.remove('animate');
-            }
-        });
-    }, observerOptions);
-    
-    cards.forEach(card => {
-        cardObserver.observe(card);
-        // Initial check for elements already in view
-        if (isElementInViewport(card)) {
-            card.classList.add('animate');
-        }
-    });
-
-    // Helper function to check if element is in viewport
-    function isElementInViewport(el) {
-        const rect = el.getBoundingClientRect();
-        return (
-            rect.top >= -50 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) + 50 &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-    }
 });
-
-function handleScroll() {
-    // Check if navbar exists before trying to modify its class list
-    if (navbar) {
-        if (window.scrollY === 0) {
-            navbar.classList.add('navbar-top');
-        } else {
-            navbar.classList.remove('navbar-top');
-        }
-    }
-}
-
-// Remove the duplicate scroll listener for handleScroll
-// window.addEventListener('scroll', handleScroll); // Remove this line
-
-// Run on initial load - The DOMContentLoaded listener now triggers the initial check
-// handleScroll(); // Remove this line
 
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('contactForm');
