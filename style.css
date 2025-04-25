@@ -426,7 +426,8 @@ main + .heading-container {
 @media (max-width: 480px) {
   .container {
     margin-top: 6rem;
-    padding: 1.5rem;
+    padding: 1rem;
+    max-width: 90%;
   }
   .hero {
     padding: 1.5rem;
@@ -460,7 +461,11 @@ main + .heading-container {
     margin-bottom: 1rem;
     border-radius: 12px;
   }
+  .education-header {
+    flex-direction: column;
+  }
   .education-header img {
+    order: -1;
     max-height: 160px;
     border-radius: 12px 12px 0 0;
   }
