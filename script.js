@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('contactForm');
     const submitButton = document.getElementById('submitButton');
-    const buttonIcon = submitButton.querySelector('.button-icon');
+    
 
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
