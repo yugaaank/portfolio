@@ -1079,7 +1079,7 @@ textarea::-webkit-scrollbar-thumb:hover {
 /* Mobile Responsive Styles continued */
 @media (max-width: 768px) {
   .container {
-    margin-top: 7rem;
+    margin-top: 2rem;
     padding: 2rem;
   }
 
