@@ -189,15 +189,16 @@
   .project-image img {
       max-width: 100%;
   }
-}
-
-@media only screen and (max-width: 768px) {
-  /* your existing code... */
-
   .r1, .r2 {
     flex-direction: column;
     align-items: center;
   }
+
+  .title {
+    margin-top: 2rem;
+  }
 }
+
+
 
 
