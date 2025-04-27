@@ -1,0 +1,203 @@
+@import "style.css";
+
+
+.title {
+    background-color: rgba(3, 1, 5, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    padding: 3rem;
+    margin-top: 5rem;
+    width: auto;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
+  .project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .project-image img {
+    width: 100%;
+    max-width: 700px;
+    height: auto; /* Adjusts height based on image aspect ratio */
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+  }
+  
+  .project-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 1rem;
+    text-align: center;
+  }
+  
+  .image {
+    background-color: rgba(3, 1, 5, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    padding: 3rem;
+    padding-top: 1rem;
+    width: 700px;
+    height: auto;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+  }
+  
+  .image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+    margin-top: 1rem;
+  }
+  
+  .project-description {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: #e0e0e0;
+    margin-top: 1rem;
+    text-align: center;
+  }
+  
+  .r1, .r2 {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .about {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  .info {
+    background-color: rgba(3, 1, 5, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    padding: 3rem;
+    padding-top: 1rem;
+    width: 700px;
+    height: auto;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+  }
+  
+  .features {
+    background-color: rgba(3, 1, 5, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    padding: 3rem;
+    padding-top: 1rem;
+    width: 700px;
+    height: auto;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+  }
+  
+  .components {
+    background-color: rgba(3, 1, 5, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    padding: 3rem;
+    padding-top: 1rem;
+    width: 700px;
+    height: auto;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+  }
+  
+  .credits {
+    background-color: rgba(3, 1, 5, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    padding: 3rem;
+    padding-top: 1rem;
+    width: 700px;
+    height: auto;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+  }
+  
+  /* ...existing code... */
+
+@media only screen and (max-width: 768px) {
+  .title,
+  .components,
+  .credits,
+  .info,
+  .features,
+  .image {
+      width: 90%;
+      padding: 2rem;
+      margin: 1rem auto;
+  }
+  
+  .project-title {
+      font-size: 1.5rem;
+  }
+  
+  .project-description {
+      font-size: 1rem;
+  }
+  
+  .project-image img {
+      max-width: 100%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  /* your existing code... */
+
+  .r1, .r2 {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+
