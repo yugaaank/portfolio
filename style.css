@@ -5,12 +5,13 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   transform: translateZ(0); /* Forces hardware acceleration */
 }
 
 body {
-  font-family: 'DM Sans', sans-serif;
+  font-family: "DM Sans", sans-serif;
   color: #f0f0f0;
   line-height: 1.6;
   min-height: 100vh;
@@ -25,6 +26,60 @@ body {
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-color: #0c0513; /* Fallback color */
+}
+
+/* Add smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Improve button states */
+.submit-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.submit-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.submit-button.success {
+  background-color: #28a745;
+}
+
+.submit-button.error {
+  background-color: #dc3545;
+}
+
+/* Improve focus states for accessibility */
+.nav-links a:focus,
+.button:focus,
+.contact-form input:focus,
+.contact-form textarea:focus,
+.contact-form button:focus {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* Add loading animation */
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.submit-button:disabled .button-icon {
+  animation: pulse 1.5s infinite;
 }
 
 /* Header and Navigation */
@@ -71,12 +126,12 @@ body {
   position: relative;
   transition: color 0.3s ease;
   border-radius: 20px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   letter-spacing: 0.02em;
 }
 
-.nav-links li a.active, 
+.nav-links li a.active,
 .nav-links li a:hover {
   background-color: #050505;
   color: #fff;
@@ -84,7 +139,7 @@ body {
 }
 
 .nav-links li a::after {
-  content: '';
+  content: "";
   display: block;
   height: 2px;
   width: 0;
@@ -132,11 +187,11 @@ body {
     max-width: 98vw;
     padding: 0.5rem 0.3rem;
   }
-  
+
   #hamburger-menu {
     display: flex;
   }
-  
+
   .nav-links {
     position: absolute;
     top: 60px;
@@ -155,16 +210,16 @@ body {
     display: flex;
     pointer-events: none;
     z-index: 1050;
-    transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1), 
-                transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  
+
   .nav-links.active {
     opacity: 1;
     transform: translateX(-50%) scaleY(1);
     pointer-events: auto;
   }
-  
+
   .nav-links li {
     width: 100%;
     text-align: center;
@@ -188,7 +243,7 @@ body {
 }
 
 .container::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -239,12 +294,12 @@ body {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   letter-spacing: -0.03em;
   line-height: 1.2;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-weight: 600;
 }
 
 .profile-info p {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1.4rem;
   color: #f0f0f0;
   max-width: 800px;
@@ -259,7 +314,7 @@ body {
 }
 
 /* === GLOBAL & SHARED STYLES === */
-.button, 
+.button,
 .contact-form button {
   display: inline-block;
   padding: 0.75rem 1.5rem;
@@ -275,7 +330,7 @@ body {
   transition: background-color 0.3s ease;
 }
 
-.button:hover, 
+.button:hover,
 .contact-form button:hover {
   background-color: #333;
   color: #fff;
@@ -329,41 +384,40 @@ body {
 }
 
 /* Section spacing adjustments */
-.projects, 
-.achievements, 
-.education, 
+.projects,
+.achievements,
+.education,
 .contact {
   margin-bottom: 1rem;
   width: 100%;
-  
 }
 
-.project-cards, 
-.achievement-cards, 
+.project-cards,
+.achievement-cards,
 .education-cards {
   padding-top: 0.5rem;
 }
 
 /* Specific section adjustments */
-.project-card, 
-.achievement-card, 
-.contact, 
+.project-card,
+.achievement-card,
+.contact,
 .education-card {
   opacity: 1;
   transform: none;
   will-change: auto;
 }
 
-.project-card.animate, 
-.achievement-card.animate, 
-.contact.animate, 
+.project-card.animate,
+.achievement-card.animate,
+.contact.animate,
 .education-card.animate {
   opacity: 1;
   transform: none;
 }
 
 /* Base styles for cards */
-.project-card, 
+.project-card,
 .achievement-card {
   flex: 0 0 auto;
   width: 90%;
@@ -382,36 +436,36 @@ body {
 }
 
 /* Hover effects */
-.project-card:hover, 
-.achievement-card:hover, 
-.contact:hover, 
+.project-card:hover,
+.achievement-card:hover,
+.contact:hover,
 .education-card:hover {
   transform: none;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 /* Sequential animation delays */
-.project-card:nth-child(2), 
-.achievement-card:nth-child(2), 
+.project-card:nth-child(2),
+.achievement-card:nth-child(2),
 .education-card:nth-child(2) {
   transition-delay: 0.1s;
 }
 
-.project-card:nth-child(3), 
-.achievement-card:nth-child(3), 
+.project-card:nth-child(3),
+.achievement-card:nth-child(3),
 .education-card:nth-child(3) {
   transition-delay: 0.2s;
 }
 
 /* Reset transitions when scrolling back up */
-.project-card:not(.animate), 
-.achievement-card:not(.animate), 
-.contact:not(.animate), 
+.project-card:not(.animate),
+.achievement-card:not(.animate),
+.contact:not(.animate),
 .education-card:not(.animate) {
   transition: opacity 0.3s ease-in, transform 0.3s ease-in;
 }
 
-.project-image-container, 
+.project-image-container,
 .achievement-image-container {
   flex: 0 0 40%;
   display: flex;
@@ -423,7 +477,7 @@ body {
   overflow: hidden;
 }
 
-.project-card img, 
+.project-card img,
 .achievement-card img {
   width: 100%;
   height: 100%;
@@ -433,12 +487,12 @@ body {
   transition: transform 0.3s ease;
 }
 
-.project-card:hover img, 
+.project-card:hover img,
 .achievement-card:hover img {
   transform: none;
 }
 
-.project-info, 
+.project-info,
 .achievement-info {
   flex: 1 1 60%;
   min-width: 250px;
@@ -450,9 +504,9 @@ body {
   background: none;
 }
 
-.project-info h3, 
+.project-info h3,
 .achievement-info h3 {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-size: 1.8rem;
   font-weight: 600;
   letter-spacing: -0.01em;
@@ -466,16 +520,16 @@ body {
   color: #fff;
 }
 
-.project-info p, 
+.project-info p,
 .achievement-info p {
-  font-family: 'DM Sans', sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: 1.1rem;
   line-height: 1.7;
   color: #e0e0e0;
   margin-bottom: 1rem;
 }
 
-.project-link, 
+.project-link,
 .achievement-link {
   display: block;
   padding: 0.6rem 1.2rem;
@@ -487,14 +541,14 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.2);
   text-align: center;
   margin: 0 auto;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   letter-spacing: 0.02em;
   text-transform: uppercase;
   font-size: 0.9rem;
 }
 
-.project-link:hover, 
+.project-link:hover,
 .achievement-link:hover {
   background-color: #fff;
   color: rgba(12, 5, 19, 0.9);
@@ -541,7 +595,7 @@ main + .heading-container {
 }
 
 .contact-form label {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   letter-spacing: 0.02em;
   color: #fff;
@@ -559,7 +613,7 @@ main + .heading-container {
   font-size: 1rem;
   resize: vertical;
   transition: all 0.3s ease;
-  font-family: 'DM Sans', sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: 1rem;
   letter-spacing: 0.01em;
 }
@@ -594,7 +648,7 @@ main + .heading-container {
   gap: 0.5rem;
   min-width: 200px;
   justify-content: center;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 600;
   letter-spacing: 0.03em;
   text-transform: uppercase;
@@ -650,7 +704,7 @@ main + .heading-container {
     font-size: 1.8rem;
   }
 
-  .project-info h3, 
+  .project-info h3,
   .achievement-info h3,
   .education-header h3 {
     font-size: 1.5rem;
@@ -688,7 +742,7 @@ main + .heading-container {
     font-size: 1.6rem;
   }
 
-  .project-info h3, 
+  .project-info h3,
   .achievement-info h3,
   .education-header h3 {
     font-size: 1.3rem;
@@ -708,8 +762,8 @@ main + .heading-container {
   width: 100%;
 }
 
-.project-cards, 
-.achievement-cards, 
+.project-cards,
+.achievement-cards,
 .education-cards {
   display: flex;
   flex-direction: column;
@@ -720,7 +774,7 @@ main + .heading-container {
   margin-bottom: 0;
 }
 
-.project-card:last-child, 
+.project-card:last-child,
 .achievement-card:last-child {
   margin-bottom: 1rem;
 }
@@ -743,13 +797,13 @@ main + .heading-container {
 }
 
 /* Section/Heading Spacing Fixes */
-.achievement-cards { 
-  margin-bottom: 0; 
-  padding-bottom: 0; 
+.achievement-cards {
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
-.achievement-card:last-child { 
-  margin-bottom: 0; 
+.achievement-card:last-child {
+  margin-bottom: 0;
 }
 
 .heading-container + #education,
@@ -764,12 +818,10 @@ main + .heading-container {
 
 /* === EDUCATION SECTION === */
 .education {
-  width: 100%;
-  margin-top: 0 !important;
-  padding: 2rem 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  width: 100%;
+  margin-bottom: 3rem;
 }
 
 .education-cards {
@@ -777,82 +829,41 @@ main + .heading-container {
   flex-direction: column;
   align-items: center;
   gap: 2rem;
-  padding-bottom: 0;
-  width: 100%;
-  margin-top: 0;
 }
 
 .education-card {
   flex: 0 0 auto;
   width: 90%;
   max-width: 850px;
+  margin: 0 auto;
   background-color: rgba(3, 1, 5, 0.7);
   backdrop-filter: blur(10px);
   color: #fff;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   border-radius: 15px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: default;
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 2rem;
-  margin-top: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.education-card:first-child {
-  margin-top: 0 !important;
-}
-
-.education-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-}
-
-.education-header {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  align-items: center;
-}
-
-.education-header img {
-  width: 40%;
-  height: 250px;
-  object-fit: cover;
-  display: block;
-  border-radius: 15px 0 0 0;
+  padding: 2rem;
+  text-align: center;
 }
 
 .education-header h3 {
-  font-size: 1.6rem;
-  font-weight: 700;
-  width: 60%;
-  margin: 0;
-  padding: 1.5rem 2rem;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
   color: #fff;
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.3;
-  background: linear-gradient(135deg, #fff 0%, #e0e0e0 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
-.education-description {
-  padding: 1.5rem 2rem;
-  color: #fff;
+.education-institution {
+  font-size: 1.2rem;
+  color: #b0b0b0;
+  margin-bottom: 0.25rem;
+}
+
+.education-duration {
+  font-size: 1rem;
+  color: #888;
+  margin-bottom: 1rem;
 }
 
 .education-description p {
-  font-size: 1rem;
-  color: #ccc;
-  line-height: 1.5;
-  margin-bottom: 1.5rem;
-  font-family: 'DM Sans', sans-serif;
   font-size: 1.1rem;
   line-height: 1.7;
   color: #e0e0e0;
@@ -870,7 +881,7 @@ main + .heading-container {
   border: 1px solid #666;
   text-align: center;
   align-self: flex-start;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   letter-spacing: 0.02em;
   text-transform: uppercase;
@@ -981,15 +992,15 @@ main + .heading-container {
 
 /* === RESPONSIVE ADJUSTMENTS === */
 @media (max-width: 900px) {
-  .project-card, 
-  .achievement-card, 
+  .project-card,
+  .achievement-card,
   .contact {
     width: 95%;
   }
 }
 
 @media (max-width: 768px) {
-  .project-card, 
+  .project-card,
   .achievement-card {
     width: 95%;
     max-width: 500px;
@@ -1005,8 +1016,8 @@ main + .heading-container {
 }
 
 @media (max-width: 480px) {
-  .project-card, 
-  .achievement-card, 
+  .project-card,
+  .achievement-card,
   .contact {
     width: 98%;
     margin-bottom: 2rem;
@@ -1014,9 +1025,9 @@ main + .heading-container {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .project-card, 
-  .achievement-card, 
-  .contact, 
+  .project-card,
+  .achievement-card,
+  .contact,
   .education-card {
     transition: none !important;
     opacity: 1 !important;
