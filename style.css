@@ -478,7 +478,8 @@ html {
 }
 
 .project-card img,
-.achievement-card img {
+.achievement-card img,
+.education-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -849,6 +850,13 @@ main + .heading-container {
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
   color: #fff;
+}
+
+.education-header img {
+  width: auto;
+  height: 150px;
+  margin: 0 auto 1rem; /* centers the image and adds bottom margin */
+  display: block;
 }
 
 .education-institution {
