@@ -8,12 +8,11 @@ Every pixel and line of code exists for one purpose: clarity through precision.
 ## 👤 About Me
 
 **Name:** Yugaank Rathore  
-**Age:** 17  
+**Age:** 18  
 **Course:** B.Tech in Computer Science (AI & ML) — Christ University, Kengeri  
-**Personality:** INFP (but trained for brutal honesty and high-performance discipline)  
 **Focus Areas:**  
 - Java, C, and Web Development (HTML, CSS, JavaScript)  
-- AI/ML Foundations and Prosthetic Robotics  
+- AI/ML Foundations and Robotics  
 - Building efficient, minimalistic, and expressive web systems  
 
 I’m not here to chase aesthetics — I’m here to **build systems that speak without noise**.  
@@ -23,21 +22,28 @@ Every project I make reflects a mindset built on precision, logic, and psycholog
 
 ## 🧩 Tech Stack
 
-### 💻 Frontend
-- **HTML5** — Semantic and structured foundation.  
-- **CSS3** — Custom styling with clean class organization and responsive layouts.  
-- **JavaScript (ES6)** — Handles all interactivity and DOM manipulation.  
+## 🧩 Tech Stack
 
-### ⚙️ Tools & Frameworks
-- **VS Code** — Primary development environment.  
-- **Git & GitHub** — Version control and deployment.  
-- **Live Server / Localhost** — Real-time testing.  
-- **(Optional)**: **Netlify / GitHub Pages** — Hosting for production.
+### ⚛️ Frontend Framework
+- **React.js** — Component-based UI architecture for modular, reusable interfaces.  
+- **Next.js** — Framework for **server-side rendering (SSR)**, **static site generation (SSG)**, and optimized routing.  
+- **JavaScript (ES6+)** — Core logic and interactivity layer.  
 
-### 🎨 Design Philosophy
-- Minimal. Fast. Brutally efficient.  
-- No clutter, no bloat, no unnecessary animations.  
-- Every transition serves a functional purpose.  
+### 🎨 Styling & UI
+- **CSS3 / Tailwind CSS** — Clean, responsive design with utility-first styling.  
+- **Framer Motion** *(optional)* — Smooth, performance-optimized animations.  
+- **Lucide Icons / shadcn/ui** — Minimal, scalable UI components for consistency.  
+
+### ⚙️ Tooling & Build
+- **Node.js & npm** — Environment and package management.  
+- **Vercel** — Deployment platform optimized for Next.js.  
+- **Git & GitHub** — Version control and collaboration.  
+- **VS Code** — Primary IDE for development.  
+
+### 🧠 Design Philosophy
+- Minimal, functional, and fast.  
+- Zero clutter, zero performance debt.  
+- Every element exists to communicate — not decorate.
 
 ---
 
