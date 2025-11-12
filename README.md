@@ -22,8 +22,6 @@ Every project I make reflects a mindset built on precision, logic, and psycholog
 
 ## 🧩 Tech Stack
 
-## 🧩 Tech Stack
-
 ### ⚛️ Frontend Framework
 - **React.js** — Component-based UI architecture for modular, reusable interfaces.  
 - **Next.js** — Framework for **server-side rendering (SSR)**, **static site generation (SSG)**, and optimized routing.  
@@ -31,7 +29,7 @@ Every project I make reflects a mindset built on precision, logic, and psycholog
 
 ### 🎨 Styling & UI
 - **CSS3 / Tailwind CSS** — Clean, responsive design with utility-first styling.  
-- **Framer Motion** *(optional)* — Smooth, performance-optimized animations.  
+- **Framer Motion** — Smooth, performance-optimized animations.  
 - **Lucide Icons / shadcn/ui** — Minimal, scalable UI components for consistency.  
 
 ### ⚙️ Tooling & Build
@@ -69,20 +67,4 @@ portfolio/
 
 ---
 
-## 📬 Contact
-
-If you want to collaborate, critique, or discuss AI/ML or creative tech:
-
-**Email:** [your.email@example.com]  
-**LinkedIn:** [linkedin.com/in/yugaankrathore]  
-**GitHub:** [github.com/yugaankrathore]
-
----
-
-## ⚡ Mindset
-
-> “Discomfort is the only real feedback loop that matters.”  
-> Growth doesn’t come from comfort. It comes from iteration, failure, and confrontation with your own incompetence.
-
----
 
