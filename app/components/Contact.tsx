@@ -1,15 +1,21 @@
 "use client";
+
 import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-// ICONS
-const IconCopy = ({ className }) => (
+// --- ICON TYPES ---
+interface IconProps {
+  className?: string;
+}
+
+// --- ICONS ---
+const IconCopy: React.FC<IconProps> = ({ className }) => (
   <svg
     className={className}
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
-    strokeWidth="1.5"
+    strokeWidth={1.5}
   >
     <path
       strokeLinecap="round"
@@ -19,26 +25,30 @@ const IconCopy = ({ className }) => (
   </svg>
 );
 
-const IconCheck = ({ className }) => (
+const IconCheck: React.FC<IconProps> = ({ className }) => (
   <svg
     className={className}
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
-    strokeWidth="2"
+    strokeWidth={2}
   >
     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
   </svg>
 );
 
-// SCRAMBLE HOOK
-const useScramble = (text, delay = 50, chars = "!<>-_\\/[]{}—=+*^?#") => {
+// --- SCRAMBLE HOOK ---
+const useScramble = (
+  text: string,
+  delay = 50,
+  chars = "!<>-_\\/[]{}—=+*^?#"
+): [string, { onMouseEnter: () => void; onMouseLeave: () => void }] => {
   const [display, setDisplay] = useState(text);
-  const intervalRef = useRef(null);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const scramble = () => {
     let i = 0;
-    clearInterval(intervalRef.current);
+    if (intervalRef.current) clearInterval(intervalRef.current);
 
     intervalRef.current = setInterval(() => {
       const out = text
@@ -51,17 +61,15 @@ const useScramble = (text, delay = 50, chars = "!<>-_\\/[]{}—=+*^?#") => {
             : chars[Math.floor(Math.random() * chars.length)]
         )
         .join("");
-
       setDisplay(out);
-
-      if (i >= text.length) clearInterval(intervalRef.current);
+      if (i >= text.length) clearInterval(intervalRef.current!);
       i += 1 / 3;
     }, delay);
   };
 
   const unscramble = () => {
     let i = text.length;
-    clearInterval(intervalRef.current);
+    if (intervalRef.current) clearInterval(intervalRef.current);
 
     intervalRef.current = setInterval(() => {
       const out = text
@@ -74,32 +82,22 @@ const useScramble = (text, delay = 50, chars = "!<>-_\\/[]{}—=+*^?#") => {
             : chars[Math.floor(Math.random() * chars.length)]
         )
         .join("");
-
       setDisplay(out);
-
       if (i <= 0) {
-        clearInterval(intervalRef.current);
+        clearInterval(intervalRef.current!);
         setDisplay(text);
       }
-
       i -= 1 / 2;
     }, delay);
   };
 
-  return [
-    display,
-    {
-      onMouseEnter: scramble,
-      onMouseLeave: unscramble,
-    },
-  ];
+  return [display, { onMouseEnter: scramble, onMouseLeave: unscramble }];
 };
 
-// MAIN COMPONENT
-const ContactSection = () => {
+// --- MAIN COMPONENT ---
+const ContactSection: React.FC = () => {
   const [isCopied, setIsCopied] = useState(false);
   const email = "yugaankrathore@gmail.com";
-
   const [scrambled, events] = useScramble(email, 30);
 
   const logLines = [
