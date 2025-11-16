@@ -1,17 +1,18 @@
 "use client";
+
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCards } from "swiper/modules";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-cards";
 
-// --- ICONS (Completed your SVG paths) ---
+// --- ICONS ---
+interface IconProps extends React.SVGProps<SVGSVGElement> {}
 
-const IconCube = ({ className }) => (
-  <svg className={className} fill="none" viewBox="0 0 24 24">
+const IconCube: React.FC<IconProps> = ({ className, ...props }) => (
+  <svg className={className} fill="none" viewBox="0 0 24 24" {...props}>
     <path
       stroke="currentColor"
       strokeWidth="1.5"
@@ -20,8 +21,8 @@ const IconCube = ({ className }) => (
   </svg>
 );
 
-const IconRobot = ({ className }) => (
-  <svg className={className} fill="none" viewBox="0 0 24 24">
+const IconRobot: React.FC<IconProps> = ({ className, ...props }) => (
+  <svg className={className} fill="none" viewBox="0 0 24 24" {...props}>
     <path
       stroke="currentColor"
       strokeWidth="1.5"
@@ -32,8 +33,8 @@ const IconRobot = ({ className }) => (
   </svg>
 );
 
-const IconHeadset = ({ className }) => (
-  <svg className={className} fill="none" viewBox="0 0 24 24">
+const IconHeadset: React.FC<IconProps> = ({ className, ...props }) => (
+  <svg className={className} fill="none" viewBox="0 0 24 24" {...props}>
     <path
       stroke="currentColor"
       strokeWidth="1.5"
@@ -44,14 +45,21 @@ const IconHeadset = ({ className }) => (
   </svg>
 );
 
-// --- EXPANDED DATA FOR MODAL ---
+// --- FEATURES DATA ---
+interface Feature {
+  id: string;
+  icon: React.FC<IconProps>;
+  title: string;
+  desc: string;
+  status: "ONLINE" | "STABLE" | "EXPERIMENTAL" | "BETA";
+  longDesc: string;
+  details: string[];
+}
 
-// --- PROJECTS DATA ---
-
-const features = [
+const features: Feature[] = [
   {
     id: "SPO2_001",
-    icon: IconHeadset, // can swap with a better icon if you want
+    icon: IconHeadset,
     title: "SpO₂ Measurer",
     desc: "Real-time blood oxygen level measurement using sensors.",
     status: "ONLINE",
@@ -111,10 +119,14 @@ const features = [
   },
 ];
 
-// --- NEW MODAL COMPONENT ---
+// --- MODAL ---
+interface FeatureModalProps {
+  feature: Feature;
+  onClose: () => void;
+}
 
-const FeatureModal = ({ feature, onClose }) => {
-  const getStatusColor = (status) => {
+const FeatureModal: React.FC<FeatureModalProps> = ({ feature, onClose }) => {
+  const getStatusColor = (status: Feature["status"]) => {
     switch (status) {
       case "ONLINE":
         return "text-lime-400";
@@ -131,7 +143,6 @@ const FeatureModal = ({ feature, onClose }) => {
 
   return (
     <>
-      {/* Backdrop */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -139,8 +150,6 @@ const FeatureModal = ({ feature, onClose }) => {
         onClick={onClose}
         className="fixed inset-0 z-40 bg-black/80 backdrop-blur-sm cursor-pointer"
       />
-
-      {/* Modal Window */}
       <motion.div
         drag
         dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
@@ -151,7 +160,7 @@ const FeatureModal = ({ feature, onClose }) => {
         transition={{ type: "spring", damping: 20, stiffness: 300 }}
         className="fixed inset-0 m-auto z-50 flex flex-col w-11/12 max-w-3xl h-auto max-h-[80vh] bg-black/90 rounded-lg border border-lime-500/30 overflow-hidden shadow-2xl shadow-lime-500/20 cursor-grab active:cursor-grabbing"
       >
-        {/* Title Bar */}
+        {/* Title */}
         <div className="flex-shrink-0 flex items-center justify-between p-4 bg-gray-900/50 border-b border-lime-500/30">
           <div className="flex items-center gap-2">
             <span className="w-3 h-3 bg-lime-500 rounded-full" />
@@ -167,24 +176,17 @@ const FeatureModal = ({ feature, onClose }) => {
           </button>
         </div>
 
-        {/* Scanline Overlay */}
-        <div className="absolute inset-0 w-full h-full opacity-[0.03] pointer-events-none z-10 bg-[repeating-linear-gradient(0deg,rgba(255,255,255,1)_0px,rgba(255,255,255,1)_1px,transparent_1px,transparent_3px)]" />
-
         {/* Content */}
         <div className="flex-grow p-8 overflow-y-auto">
           <motion.div
             initial="hidden"
             animate="visible"
             variants={{
-              hidden: { opacity: 0 },
-              visible: {
-                opacity: 1,
-                transition: { staggerChildren: 0.1 },
-              },
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.1 } },
             }}
             className="grid grid-cols-1 md:grid-cols-3 gap-8"
           >
-            {/* Left Column (Icon & Status) */}
             <motion.div
               variants={{
                 hidden: { opacity: 0, x: -20 },
@@ -206,12 +208,12 @@ const FeatureModal = ({ feature, onClose }) => {
                     className={`animate-ping absolute inline-flex h-full w-full rounded-full ${getStatusColor(
                       feature.status
                     ).replace("text-", "bg-")} opacity-75`}
-                  ></span>
+                  />
                   <span
                     className={`relative inline-flex rounded-full h-3 w-3 ${getStatusColor(
                       feature.status
                     ).replace("text-", "bg-")}`}
-                  ></span>
+                  />
                 </span>
                 <span
                   className={`font-mono text-sm ${getStatusColor(
@@ -223,7 +225,6 @@ const FeatureModal = ({ feature, onClose }) => {
               </div>
             </motion.div>
 
-            {/* Right Column (Details) */}
             <motion.div
               variants={{
                 hidden: { opacity: 0, x: 20 },
@@ -237,7 +238,6 @@ const FeatureModal = ({ feature, onClose }) => {
               <p className="text-white/70 text-base leading-relaxed font-mono mb-6">
                 {feature.longDesc}
               </p>
-
               <h4 className="font-mono text-lg text-lime-400 mb-3">
                 // SYSTEM_SPECS
               </h4>
@@ -253,7 +253,8 @@ const FeatureModal = ({ feature, onClose }) => {
                     transition={{ delay: 0.2 + i * 0.05 }}
                     className="font-mono text-white/60 text-sm flex items-center"
                   >
-                    <span className="text-lime-400 mr-2">»</span> {detail}
+                    <span className="text-lime-400 mr-2">»</span>
+                    {detail}
                   </motion.li>
                 ))}
               </ul>
@@ -265,11 +266,9 @@ const FeatureModal = ({ feature, onClose }) => {
   );
 };
 
-// --- MAIN FEATURES SECTION ---
-
-const FeaturesSection = () => {
-  const [selectedId, setSelectedId] = useState(null);
-
+// --- FEATURES SECTION ---
+const FeaturesSection: React.FC = () => {
+  const [selectedId, setSelectedId] = useState<string | null>(null);
   const selectedFeature = features.find((f) => f.id === selectedId) || null;
 
   return (
@@ -277,19 +276,16 @@ const FeaturesSection = () => {
       <section id="features" className="py-40 bg-transparent">
         <div className="container mx-auto px-6 md:px-12 max-w-6xl">
           <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-24">
-            {/* LEFT BLOCK */}
             <div className="max-w-[550px] text-white/80 leading-relaxed">
               <h2 className="text-5xl font-medium text-white tracking-tight mb-8 font-mono">
                 Things I Build
               </h2>
-
               <p className="text-lg text-white/60 font-mono leading-loose mb-6">
                 I design and develop real-world tech solutions—from medical
                 devices and prosthetics to AI-driven analysis tools and
                 cybersecurity systems. Each project is engineered for
                 functionality, reliability, and measurable impact.
               </p>
-
               <p className="text-lg text-white/60 font-mono leading-loose">
                 My work combines hardware, software, and AI to create devices
                 and algorithms that perform, adapt, and solve complex problems.
@@ -297,7 +293,6 @@ const FeaturesSection = () => {
               </p>
             </div>
 
-            {/* RIGHT — Card Stack */}
             <div
               className="mx-auto"
               style={{ width: 320, height: 420, perspective: "1200px" }}
@@ -326,19 +321,11 @@ const FeaturesSection = () => {
                       className="relative w-full h-full p-8 bg-transparent cursor-pointer"
                       onClick={() => setSelectedId(feature.id)}
                     >
-                      <div
-                        className="relative w-full h-full rounded-2xl
-                        bg-black/90 backdrop-blur-xl border border-gray-400/10
-                        shadow-[0_0_60px_-15px_rgba(255,255,255,0.15)]
-                        p-10 flex flex-col items-center justify-center text-center
-                        transition-all duration-300 hover:scale-[1.03] hover:shadow-lime-500/20"
-                      >
+                      <div className="relative w-full h-full rounded-2xl bg-black/90 backdrop-blur-xl border border-gray-400/10 shadow-[0_0_60px_-15px_rgba(255,255,255,0.15)] p-10 flex flex-col items-center justify-center text-center transition-all duration-300 hover:scale-[1.03] hover:shadow-lime-500/20">
                         <feature.icon className="w-16 h-16 text-lime-400 mb-6" />
-
                         <h3 className="font-mono text-2xl text-white mb-3 tracking-tight">
                           {feature.title}
                         </h3>
-
                         <p className="text-white/50 text-sm leading-relaxed font-mono">
                           {feature.desc}
                         </p>
@@ -352,7 +339,6 @@ const FeaturesSection = () => {
         </div>
       </section>
 
-      {/* Render Modal */}
       <AnimatePresence>
         {selectedFeature && (
           <FeatureModal

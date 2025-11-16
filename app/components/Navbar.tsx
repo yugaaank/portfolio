@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Github, Linkedin, Apple } from "lucide-react"; // updated imports
+import { motion, Variants } from "framer-motion";
+import { Github, Linkedin, Apple } from "lucide-react";
 
-const islandVariants = {
+const islandVariants: Variants = {
   hidden: {
     y: -40,
     opacity: 0,
@@ -15,8 +15,11 @@ const islandVariants = {
     y: 0,
     opacity: 1,
     width: "calc(100% - 32px)",
+    borderRadius: "12px",
     transition: {
-      y: { type: "spring", stiffness: 300, damping: 26 },
+      type: "spring",
+      stiffness: 300,
+      damping: 26,
       opacity: { duration: 0.2 },
       width: { type: "spring", stiffness: 240, damping: 22 },
     },
@@ -33,9 +36,8 @@ const NAV_ITEMS = [
 
 export default function Navbar() {
   const [show, setShow] = useState(false);
-  const [active, setActive] = useState("home");
+  const [active, setActive] = useState("hero");
 
-  // Show/hide navbar when scrolling
   useEffect(() => {
     const onScroll = () => setShow(window.scrollY > 50);
     onScroll();
@@ -43,7 +45,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Active section tracking
   useEffect(() => {
     const sections = NAV_ITEMS.map((item) =>
       document.getElementById(item.id)
@@ -57,17 +58,13 @@ export default function Navbar() {
           }
         });
       },
-      {
-        threshold: 0.5, // must be 50% visible to count
-      }
+      { threshold: 0.5 }
     );
 
     sections.forEach((sec) => observer.observe(sec));
-
     return () => sections.forEach((sec) => observer.unobserve(sec));
   }, []);
 
-  // Scroll to section (Lenis supported)
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
     if (!el) return;
@@ -105,16 +102,14 @@ export default function Navbar() {
         <span className="font-semibold text-sm">Welcome</span>
       </div>
 
-      {/* Center Menu */}
       <div className="hidden sm:flex items-center gap-6">
         {NAV_ITEMS.map((item) => (
           <span
             key={item.id}
             onClick={() => scrollToSection(item.id)}
-            className={`
-              text-sm font-medium cursor-pointer transition
-              ${active === item.id ? "text-white" : "text-gray-400"}
-            `}
+            className={`text-sm font-medium cursor-pointer transition ${
+              active === item.id ? "text-white" : "text-gray-400"
+            }`}
           >
             {item.label}
           </span>
@@ -126,7 +121,7 @@ export default function Navbar() {
           href="https://github.com/yugaaank/"
           target="_blank"
           rel="noopener noreferrer"
-          className="cursor-pointer hover:text-white"
+          className="hover:text-white"
         >
           <Github size={20} />
         </a>
@@ -134,7 +129,7 @@ export default function Navbar() {
           href="https://www.linkedin.com/in/yugank-rathore-617614317/"
           target="_blank"
           rel="noopener noreferrer"
-          className="cursor-pointer hover:text-white"
+          className="hover:text-white"
         >
           <Linkedin size={20} />
         </a>

@@ -1,11 +1,20 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants, Transition } from "framer-motion";
 import React, { useState } from "react";
 
 // --- Skill Data ---
-// (No changes here, data is the same, 'level' is just not used)
-const skillCategories = [
+interface Skill {
+  name: string;
+  level: number;
+}
+
+interface SkillCategory {
+  title: string;
+  skills: Skill[];
+}
+
+const skillCategories: SkillCategory[] = [
   {
     title: "// Core_Web_Stack",
     skills: [
@@ -38,59 +47,43 @@ const skillCategories = [
   },
 ];
 
-// --- Main Skills Component (Tabbed Interface, No Bars) ---
+// --- Easing and Transition ---
+const defaultTransition: Transition = {
+  duration: 0.3,
+  ease: [0.42, 0, 0.58, 1],
+}; // easeInOut equivalent
 
+// --- Motion Variants ---
+const titleContainerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.05 } },
+};
+
+const letterVariants: Variants = {
+  hidden: { opacity: 0, y: 10 },
+  visible: { opacity: 1, y: 0 },
+};
+
+const contentVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: defaultTransition },
+  exit: { opacity: 0, y: -20, transition: defaultTransition },
+};
+
+const listContainerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.08 } },
+};
+
+const listItemVariants: Variants = {
+  hidden: { opacity: 0, x: -20 },
+  visible: { opacity: 1, x: 0 },
+};
+
+// --- Main Component ---
 export default function Skills() {
+  const [activeIndex, setActiveIndex] = useState(0);
   const title = "> ./system-diag --skills --load-module";
-  const [activeIndex, setActiveIndex] = useState(0); // Track active tab
-
-  // --- Animation Variants ---
-  const titleContainerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.05,
-      },
-    },
-  };
-
-  const letterVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: { opacity: 1, y: 0 },
-  };
-
-  // Variants for the content area (the list of bars)
-  const contentVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.3, ease: "easeInOut" },
-    },
-    exit: {
-      opacity: 0,
-      y: -20,
-      transition: { duration: 0.3, ease: "easeInOut" },
-    },
-  };
-
-  // Variants for the list of skills (staggering)
-  const listContainerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.08, // Stagger each skill
-      },
-    },
-  };
-
-  // Variants for each individual skill item
-  const listItemVariants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: { opacity: 1, x: 0 },
-  };
 
   return (
     <section
@@ -118,26 +111,23 @@ export default function Skills() {
           />
         </motion.h2>
 
-        {/* --- Tab Navigation --- */}
+        {/* Tab Navigation */}
         <div className="flex space-x-4 border-b border-gray-800 mb-8">
           {skillCategories.map((category, index) => (
             <button
               key={category.title}
               onClick={() => setActiveIndex(index)}
-              className={`relative py-3 px-4 text-sm md:text-base font-medium transition-colors duration-200
-                ${
-                  activeIndex === index
-                    ? "text-green-400" // Active tab
-                    : "text-gray-500 hover:text-gray-300" // Inactive tab
-                }
-              `}
+              className={`relative py-3 px-4 text-sm md:text-base font-medium transition-colors duration-200 ${
+                activeIndex === index
+                  ? "text-green-400"
+                  : "text-gray-500 hover:text-gray-300"
+              }`}
             >
               {category.title}
-              {/* Animated Underline */}
               {activeIndex === index && (
                 <motion.div
                   className="absolute bottom-0 left-0 right-0 h-0.5 bg-green-400"
-                  layoutId="skill-underline" // Framer Motion magic
+                  layoutId="skill-underline"
                   transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 />
               )}
@@ -145,19 +135,16 @@ export default function Skills() {
           ))}
         </div>
 
-        {/* --- Tab Content --- */}
+        {/* Tab Content */}
         <div className="min-h-[250px]">
-          {" "}
-          {/* Min height to prevent layout jump */}
           <AnimatePresence mode="wait">
             <motion.div
-              key={activeIndex} // This makes AnimatePresence work
+              key={activeIndex}
               variants={contentVariants}
               initial="hidden"
               animate="visible"
               exit="exit"
             >
-              {/* Staggered list of skills */}
               <motion.ul
                 className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-3"
                 variants={listContainerVariants}
