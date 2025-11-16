@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧠 Yugaank Rathore — Portfolio
 
-## Getting Started
+This repository contains the source code for my personal portfolio — a single-page site designed to **represent me, my work, and my mindset** as a Computer Science student specializing in **Artificial Intelligence and Machine Learning**.  
+Every pixel and line of code exists for one purpose: clarity through precision.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 👤 About Me
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Name:** Yugaank Rathore  
+**Age:** 18  
+**Course:** B.Tech in Computer Science (AI & ML) — Christ University, Kengeri  
+**Focus Areas:**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Java, C, and Web Development (HTML, CSS, JavaScript)
+- AI/ML Foundations and Robotics
+- Building efficient, minimalistic, and expressive web systems
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+I’m not here to chase aesthetics — I’m here to **build systems that speak without noise**.  
+Every project I make reflects a mindset built on precision, logic, and psychological depth.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🧩 Tech Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### ⚛️ Frontend Framework
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **React.js** — Component-based UI architecture for modular, reusable interfaces.
+- **Next.js** — Framework for **server-side rendering (SSR)**, **static site generation (SSG)**, and optimized routing.
+- **JavaScript (ES6+)** — Core logic and interactivity layer.
 
-## Deploy on Vercel
+### 🎨 Styling & UI
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **CSS3 / Tailwind CSS** — Clean, responsive design with utility-first styling.
+- **Framer Motion** — Smooth, performance-optimized animations.
+- **Lucide Icons / shadcn/ui** — Minimal, scalable UI components for consistency.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### ⚙️ Tooling & Build
+
+- **Node.js & npm** — Environment and package management.
+- **Vercel** — Deployment platform optimized for Next.js.
+- **Git & GitHub** — Version control and collaboration.
+- **VS Code** — Primary IDE for development.
+
+### 🧠 Design Philosophy
+
+- Minimal, functional, and fast.
+- Zero clutter, zero performance debt.
+- Every element exists to communicate — not decorate.
+
+---
+
+## 🚀 Project Structure
+
+portfolio/
+│
+├── index.html # Core structure
+├── style.css # Layout and visual design
+├── script.js # Dynamic behavior and logic
+├── assets/ # Images, icons, and resources
+└── README.md # You’re here
+
+---
+
+## 🧠 Key Features
+
+- **Responsive Design** — Adapts to all screens.
+- **Clean Navigation** — Seamless user experience.
+- **Sectioned Layout** — About, Skills, Projects, Contact.
+- **Lightweight Performance** — No unnecessary dependencies.
+
+---

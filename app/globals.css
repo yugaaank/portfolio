@@ -1,8 +1,28 @@
 @import "tailwindcss";
 
+/* --- ADD THESE SWIPER IMPORTS --- */
+@import "swiper/css/effect-cards";
+@import "swiper/css";
+@import "swiper/css/effect-coverflow";
+@import "swiper/css/pagination";
+@import "swiper/css/navigation";
+/* --- END SWIPER IMPORTS --- */
 :root {
   --background: #ffffff;
   --foreground: #171717;
+}
+
+.swiper {
+  --swiper-navigation-color: #fff;
+  --swiper-pagination-color: #fff;
+}
+
+.swiper {
+  perspective: 1200px !important;
+}
+
+.swiper-slide {
+  border-radius: 20px;
 }
 
 @theme inline {
@@ -23,4 +43,45 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.swiper {
+  width: 300px;
+  height: 400px;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gradient-mask-l {
+  background-image: linear-gradient(to right, var(--background), transparent);
+}
+.gradient-mask-r {
+  background-image: linear-gradient(to left, var(--background), transparent);
+}
+
+.pause-on-hover:hover .animate-marquee {
+  animation-play-state: paused;
+}
+.marquee-track {
+  display: flex;
+  white-space: nowrap;
+  width: max-content;
+  animation: marqueeAnim 30s linear infinite;
+}
+
+@keyframes marqueeAnim {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
 }

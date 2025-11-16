@@ -1,65 +1,182 @@
-import Image from "next/image";
+"use client";
+import React, { useState, useEffect, useRef } from "react";
+import HeroSection from "./components/Hero";
+import Navbar from "./components/Navbar";
+import FeaturesSection from "./components/Projects";
+import GallerySection from "./components/Skills";
+import HowItWorksSection from "./components/AboutMe";
+import PricingCTASection from "./components/Contact";
+import Footer from "./components/FooterSection";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import AboutMe from "./components/AboutMe";
+import Skills from "./components/Skills";
 
-export default function Home() {
+import Lenis from "lenis";
+import ContactSection from "./components/Contact";
+
+// --- Loading Screen Component ---
+const LoadingOverlay = ({ loading }: any) => (
+  <div
+    className={`fixed inset-0 z-100 flex items-center justify-center bg-black transition-opacity duration-500 ${
+      loading ? "opacity-100" : "opacity-0 pointer-events-none"
+    }`}
+  >
+    <div className="glitch-bg" />
+    <div className="absolute top-0 left-0 w-full h-[5px] bg-lime-400 shadow-glow-lime animate-[scan_2s_cubic-bezier(0.645,0.045,0.355,1)_forwards]" />
+  </div>
+);
+
+// --- Main App Component ---
+export default function App() {
+  const [loading, setLoading] = useState(true);
+  const [scriptsLoaded, setScriptsLoaded] = useState(false);
+  const [scrollPct, setScrollPct] = useState(0);
+
+  // Handle loading screen
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Handle scroll percentage
+  useEffect(() => {
+    const lenis = new Lenis({
+      smooth: true,
+      lerp: 0.05,
+      wheelMultiplier: 0.7,
+      duration: 1.2,
+    });
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    // forward scroll events so your existing logic still works
+    lenis.on("scroll", ({ scroll }) => {
+      const viewportHeight = window.innerHeight;
+      const pct = Math.min(1, scroll / viewportHeight);
+      setScrollPct(pct);
+    });
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
+  // Handle dynamic script loading for Three.js and Swiper
+  useEffect(() => {
+    const loadScript = (src: any, onDone: any) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.async = true;
+      script.onload = onDone;
+      script.onerror = () => console.error(`Failed to load script: ${src}`);
+      document.body.appendChild(script);
+      return script;
+    };
+
+    let threeLoaded = false;
+    let controlsLoaded = false;
+    let swiperLoaded = false;
+
+    const checkAllLoaded = () => {
+      if (threeLoaded && controlsLoaded && swiperLoaded) {
+        setScriptsLoaded(true);
+      }
+    };
+
+    // Load Three.js r128
+    loadScript(
+      "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js",
+      () => {
+        threeLoaded = true;
+        // Load OrbitControls (dependent on Three.js)
+        loadScript(
+          "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js",
+          () => {
+            controlsLoaded = true;
+            checkAllLoaded();
+          }
+        );
+      }
+    );
+
+    // Load Swiper.js
+    loadScript("https://unpkg.com/swiper/swiper-bundle.min.js", () => {
+      swiperLoaded = true;
+      checkAllLoaded();
+    });
+
+    // Also load Swiper CSS
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "https://unpkg.com/swiper/swiper-bundle.min.css";
+    document.head.appendChild(link);
+
+    // Cleanup scripts on unmount
+    return () => {
+      // In a real app, you might want to find and remove the scripts/link
+      // For this single-page context, it's less critical.
+    };
+  }, []);
+
+  // Handle scroll-reveal animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const elements = document.querySelectorAll(".reveal");
+    elements.forEach((el) => observer.observe(el));
+
+    return () => {
+      elements.forEach((el) => observer.unobserve(el));
+    };
+  }, [loading]); // Re-run when loading is done to find elements
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      <LoadingOverlay loading={loading} />
+
+      {!loading && (
+        <div className="bg-black snap-y snap-mandatory">
+          <Navbar />
+          <main>
+            <section id="hero" className="snap-start h-[110vh]">
+              <HeroSection
+                scriptsLoaded={scriptsLoaded}
+                scrollPct={scrollPct}
+              />
+            </section>
+
+            <section id="about" className="snap-start h-[110vh]">
+              <AboutMe />
+            </section>
+
+            <section id="projects" className="snap-start h-[110vh]">
+              <FeaturesSection scriptsLoaded={scriptsLoaded} />
+            </section>
+            <Skills />
+
+            <section id="contact" className="snap-start h-[110vh]">
+              <ContactSection />
+            </section>
+          </main>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      )}
+    </>
   );
 }
