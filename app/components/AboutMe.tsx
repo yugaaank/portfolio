@@ -1,13 +1,13 @@
-// AboutMe Modal - Cinematic, Dialogue-Style, Terminal Vibe
+"use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { Cpu, Terminal, HardDrive, Sparkles } from "lucide-react";
 import { useRef } from "react";
 
 export default function AboutMe() {
-  const constraintsRef = useRef(null);
+  const constraintsRef = useRef<HTMLDivElement>(null);
 
-  const logContainerVariants = {
+  const logContainerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -15,7 +15,7 @@ export default function AboutMe() {
     },
   };
 
-  const logItemVariants = {
+  const logItemVariants: Variants = {
     hidden: { opacity: 0, x: -20 },
     visible: {
       opacity: 1,
@@ -24,12 +24,19 @@ export default function AboutMe() {
     },
   };
 
-  const instructionVariants = {
+  const instructionVariants: Variants = {
     hidden: { opacity: 0, y: -10 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { yoyo: Infinity, duration: 1, ease: "easeInOut" },
+      transition: {
+        y: {
+          repeat: Infinity,
+          repeatType: "reverse",
+          duration: 1,
+          ease: "easeInOut",
+        },
+      },
     },
   };
 
@@ -51,7 +58,7 @@ export default function AboutMe() {
         </motion.h2>
 
         <motion.div
-          className="bg-[#0a0a0a] border border-white/10 rounded-2xl shadow-xl backdrop-blur-xl select-none relative"
+          className="bg-[#0a0a0a] border border-white/10 rounded-2xl shadow-xl backdrop-blur-xl relative"
           initial={{ opacity: 0, y: 40, scale: 0.98 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, amount: 0.3 }}
@@ -59,7 +66,7 @@ export default function AboutMe() {
           drag
           dragConstraints={constraintsRef}
           dragElastic={0.3}
-          dragMomentum={true}
+          dragMomentum
           whileDrag={{ scale: 1.02 }}
           dragTransition={{ bounceStiffness: 400, bounceDamping: 15 }}
         >
@@ -146,17 +153,21 @@ export default function AboutMe() {
   );
 }
 
-function Log({ icon, label, children, variants }) {
+interface LogProps {
+  icon: React.ReactNode;
+  label: string;
+  children: React.ReactNode;
+  variants: Variants;
+}
+
+function Log({ icon, label, children, variants }: LogProps) {
   return (
     <motion.div className="flex items-start select-none" variants={variants}>
       <div className="flex items-center mr-3 text-gray-500 gap-2">
         {icon}
         <span className="text-green-400 font-medium">{label}</span>
       </div>
-      <span
-        className="flex-1 text-gray-300"
-        dangerouslySetInnerHTML={{ __html: children }}
-      />
+      <span className="flex-1 text-gray-300">{children}</span>
     </motion.div>
   );
 }
