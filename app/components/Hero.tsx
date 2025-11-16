@@ -127,9 +127,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({
 
       {/* Typing Overlay */}
       <div className="relative z-10 flex flex-col items-center p-4">
-        <div className="text-2xl font-extralight text-justify">
+        <div className="text-2xl font-sans text-justify">
           <TypeAnimation
             sequence={[
+              600,
               "Hello",
               500,
               "Hello there,",

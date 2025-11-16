@@ -9,55 +9,90 @@ import AboutMe from "./components/AboutMe";
 import ContactSection from "./components/Contact";
 
 import Lenis from "lenis";
-// --- Loading Screen Component ---
+
 const LoadingOverlay = ({ loading }: { loading: boolean }) => (
   <div
-    className={`fixed inset-0 z-50 flex items-center justify-center bg-black transition-opacity duration-500 ${
+    className={`fixed inset-0 z-50 flex flex-col items-center justify-center bg-black bg-opacity-95 backdrop-blur-sm transition-opacity duration-500 ${
       loading ? "opacity-100" : "opacity-0 pointer-events-none"
     }`}
   >
-    <div className="glitch-bg" />
-    <div className="absolute top-0 left-0 w-full h-[5px] bg-lime-400 shadow-glow-lime animate-[scan_2s_cubic-bezier(0.645,0.045,0.355,1)_forwards]" />
+    {/* Sliding neon bar */}
+    <div className="relative w-80 h-1 bg-lime-900 overflow-hidden mb-6">
+      <div className="absolute top-0 left-[-100%] w-full h-full bg-lime-400 animate-[slide_2s_linear_infinite]"></div>
+    </div>
+
+    {/* Glitch-style text */}
+    <span className="text-lime-400 font-mono text-xl tracking-widest relative after:content-['LOADING...'] after:absolute after:left-0 after:text-lime-600 after:translate-x-0.5 after:blur-sm animate-[glitch_1s_steps(2)_infinite]">
+      LOADING...
+    </span>
+
+    <style jsx>{`
+      @keyframes slide {
+        0% {
+          left: -100%;
+        }
+        50% {
+          left: 100%;
+        }
+        100% {
+          left: -100%;
+        }
+      }
+      @keyframes glitch {
+        0% {
+          transform: translate(0, 0);
+        }
+        20% {
+          transform: translate(-2px, 2px);
+        }
+        40% {
+          transform: translate(2px, -2px);
+        }
+        60% {
+          transform: translate(-1px, 1px);
+        }
+        80% {
+          transform: translate(1px, -1px);
+        }
+        100% {
+          transform: translate(0, 0);
+        }
+      }
+    `}</style>
   </div>
 );
 
-// --- Main App Component ---
 export default function App() {
   const [loading, setLoading] = useState(true);
   const [scriptsLoaded, setScriptsLoaded] = useState(false);
   const [scrollPct, setScrollPct] = useState(0);
 
-  // --- Loading Screen ---
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 2000);
     return () => clearTimeout(timer);
   }, []);
 
-  // --- Lenis Smooth Scrolling ---
+  // --- Simple Slow Lenis Scroll ---
   useEffect(() => {
+    // Initialize Lenis
     const lenis = new Lenis({
-      duration: 1.2, // smooth animation duration
-      easing: (t: number) => t, // linear easing (replace with custom if needed)
-      lerp: 0.05, // interpolation for smoothness
-      wheelMultiplier: 0.7,
+      duration: 1.4,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Custom easing function
+      smoothWheel: true,
     });
 
-    function raf(time: number) {
+    // Animation function
+    function raf(time: any) {
       lenis.raf(time);
       requestAnimationFrame(raf);
     }
+
+    // Start the animation loop
     requestAnimationFrame(raf);
 
-    // Forward scroll percentage
-    lenis.on("scroll", ({ scroll }) => {
-      const viewportHeight = window.innerHeight;
-      setScrollPct(Math.min(1, scroll / viewportHeight));
-    });
-
+    // Cleanup on component unmount
     return () => lenis.destroy();
   }, []);
-
-  // --- Dynamic Script Loader ---
   useEffect(() => {
     const loadScript = (src: string, onDone: () => void) => {
       const script = document.createElement("script");
@@ -108,52 +143,34 @@ export default function App() {
       // Optional cleanup for scripts and link tags
     };
   }, []);
-
-  // --- Scroll Reveal Animations ---
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) entry.target.classList.add("active");
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const elements = document.querySelectorAll(".reveal");
-    elements.forEach((el) => observer.observe(el));
-
-    return () => elements.forEach((el) => observer.unobserve(el));
-  }, [loading]);
-
   return (
     <>
       <LoadingOverlay loading={loading} />
 
       {!loading && (
-        <div className="bg-black snap-y snap-mandatory">
+        <div className="bg-black">
           <Navbar />
           <main>
-            <section id="hero" className="snap-start h-[110vh]">
+            <section id="hero" className="h-[110vh]">
               <HeroSection
                 scriptsLoaded={scriptsLoaded}
                 scrollPct={scrollPct}
               />
             </section>
 
-            <section id="about" className="snap-start h-[110vh]">
+            <section id="about" className="h-[110vh]">
               <AboutMe />
             </section>
 
-            <section id="projects" className="snap-start h-[110vh]">
+            <section id="projects" className="h-[110vh]">
               <FeaturesSection />
             </section>
 
-            <section id="skills" className="snap-start">
+            <section id="skills" className="h-[110vh]">
               <GallerySection />
             </section>
 
-            <section id="contact" className="snap-start h-[110vh]">
+            <section id="contact" className="h-[90vh]">
               <ContactSection />
             </section>
           </main>
